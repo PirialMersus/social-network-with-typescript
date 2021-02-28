@@ -9,20 +9,7 @@
   "n c";
 }
 
-.header {
-    grid-area: h;
-    background-color: aliceblue;
-}
-.header img {
-    height: 60px;
-}
 
-.nav {
-    grid-area: n;
-    background-color: beige;
-}
 
-.content {
-    grid-area: c;
-    background-color: antiquewhite;
-}
+
+
