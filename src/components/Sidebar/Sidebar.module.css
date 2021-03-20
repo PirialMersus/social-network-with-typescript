@@ -1,0 +1,21 @@
+.friends {
+    display: flex;
+    justify-content: space-between;
+}
+.friend img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: block;
+}
+.friend p {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    text-align: center;
+    color: white;
+}
+a {
+    text-decoration: none;
+    list-style: none;
+}
