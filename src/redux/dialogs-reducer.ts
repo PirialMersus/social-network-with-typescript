@@ -3,7 +3,7 @@ import {DialogsPageType} from "./store";
 const ADD_MESSAGE = "ADD-MESSAGE"
 const ON_CHANGE_MESSAGE_FIELD = "ON-CHANGE-MESSAGE-FIELD"
 
-type DialogsReducerActionType = {
+export type DialogsReducerActionType = {
     type: "ADD-MESSAGE" | "ON-CHANGE-MESSAGE-FIELD"
     text: string
 }
@@ -63,7 +63,6 @@ const initialState = {
 }
 
 
-
 const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsReducerActionType) => {
     switch (action.type) {
         case ADD_MESSAGE:
@@ -71,12 +70,15 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsRe
                 id: (state.messages.length + 1),
                 message: state.tempMessage,
             }
-            state.messages.push(newMessage)
-            state.tempMessage = ''
-            return state
+            return {...state,
+                messages: [...state.messages, newMessage],
+                tempMessage: ''
+            }
         case ON_CHANGE_MESSAGE_FIELD:
-            state.tempMessage = action.text
-            return state
+            return {
+                ...state,
+                tempMessage: action.text
+            }
         default:
             return state
     }

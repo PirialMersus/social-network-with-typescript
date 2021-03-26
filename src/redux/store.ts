@@ -58,7 +58,7 @@ const store: RootStoreType = {
                 {id: 3, message: "_______", likesCount: 0},
                 {id: 4, message: "nes845k50-__+__++___", likesCount: 45},
                 {id: 5, message: "sdfsdfs", likesCount: 100},
-                {id: 6, message: "sdfsdfs", likesCount: 53},
+                {id: 6, message: "Привет из Одессы", likesCount: 53},
             ],
             tempPostValue: ''
         },

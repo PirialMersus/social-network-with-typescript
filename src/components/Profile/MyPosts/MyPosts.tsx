@@ -6,11 +6,14 @@ import {ProfilePageType} from "../../../redux/store";
 type MyPostsPropsType = {
     profilePage: ProfilePageType | undefined
     addPost: () => void
-    onChangeFunction: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+    onChangeFunction: (value: string) => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
 
+    const changeCurrentValueHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        props.onChangeFunction(e.currentTarget.value)
+    }
 
     return (
         <div className={s.content}>
@@ -18,7 +21,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                 <h3>My Posts</h3>
                 <div>
                     <textarea
-                        onChange={props.onChangeFunction}
+                        onChange={changeCurrentValueHandler}
                         value={props.profilePage?.tempPostValue}
                     />
                 </div>

@@ -33,12 +33,20 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
                 message: state.tempPostValue,
                 likesCount: 0
             }
-            state.posts.push(newPost)
-            state.tempPostValue = ''
-            return state
+            // state.posts.push(newPost)
+            // state.tempPostValue = ''
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                tempPostValue: ''
+            }
         case ON_CHANGE_POST_FIELD:
-            state.tempPostValue = action.text
-            return state
+            return {
+                ...state,
+                tempPostValue: action.text
+            }
+            // state.tempPostValue = action.text
+            // return state
         default:
             return state
     }
