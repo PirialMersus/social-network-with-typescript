@@ -74,15 +74,15 @@ const store: RootStoreType = {
         },
         usersPage: {
             users: [
-                {id: 1, name: "Gena", imgAddress: "https://www.facebook.com/photo?fbid=1401688030071714&set=a.1401688023405048", isFriend: true},
+                {id: 1, name: "Gena", imgAddress: "https://www.facebook.com/photo?fbid=1401688030071714&set=a.1401688023405048", isFriend: false},
                 {id: 2, name: "Oleg", imgAddress: "https://sun9-46.userapi.com/impf/c858036/v858036690/35f2a/yVUs0qtv09g.jpg?size=453x604&quality=96&sign=fdb80355cb56b8248463e6cabb381cfe&c_uniq_tag=jFOqULgb0cFsQD0lPceHQiCgZNkbJ4OVhdJXX7zVnXk&type=album", isFriend: true},
-                {id: 3, name: "Artyom", imgAddress: "https://sociumin.com/img.php?i=https://sun9-22.userapi.com/impf/c626727/v626727691/2e6f6/A65OTy3fMx4.jpg?size=1280x949&quality=96&sign=c1c716626592807e481a62ba1121c95b&c_uniq_tag=DNxbxckjaqyLA7gNnaudrMBIkv3HaCX1v2h0rdAY2DA&type=album", isFriend: true},
-                {id: 4, name: "Sergey", imgAddress: "https://pp.userapi.com/c623629/v623629404/27d80/smMNXraQvqs.jpg", isFriend: true},
+                {id: 3, name: "Artyom", imgAddress: "https://sociumin.com/img.php?i=https://sun9-22.userapi.com/impf/c626727/v626727691/2e6f6/A65OTy3fMx4.jpg?size=1280x949&quality=96&sign=c1c716626592807e481a62ba1121c95b&c_uniq_tag=DNxbxckjaqyLA7gNnaudrMBIkv3HaCX1v2h0rdAY2DA&type=album", isFriend: false},
+                {id: 4, name: "Sergey", imgAddress: "https://pp.userapi.com/c623629/v623629404/27d80/smMNXraQvqs.jpg", isFriend: false},
                 {id: 5, name: "Dimych", imgAddress: "https://pp.userapi.com/c10872/u2382100/-6/z_1767adef.jpg", isFriend: true},
-                {id: 6, name: "Alena", imgAddress: "https://sun9-53.userapi.com/c9915/u33211270/-6/x_b732f883.jpg", isFriend: true},
+                {id: 6, name: "Alena", imgAddress: "https://sun9-53.userapi.com/c9915/u33211270/-6/x_b732f883.jpg", isFriend: false},
                 {id: 7, name: "Arnold", imgAddress: "https://hsto.org/webt/es/-h/qg/es-hqgavgp68u_4abkffylhpgnu.jpeg", isFriend: true},
-                {id: 8, name: "Sanya", imgAddress: "https://www.facebook.com/photo?fbid=1401688030071714&set=a.1401688023405048", isFriend: true},
-                {id: 9, name: "Bruce Lee", imgAddress: "https://www.facebook.com/photo?fbid=1401688030071714&set=a.1401688023405048", isFriend: true},
+                {id: 8, name: "Sanya", imgAddress: "http://i.piccy.info/i9/67fe4eff36567db7c8477175d01be5bd/1617482451/6058/1423747/9218sanya.jpg", isFriend: true},
+                {id: 9, name: "Bruce Lee", imgAddress: "https://i.ytimg.com/vi/oBBoYye6-dc/maxresdefault.jpg", isFriend: true},
             ]
         },
         dialogsPage: {
