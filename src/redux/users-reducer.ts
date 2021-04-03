@@ -1,3 +1,5 @@
+import { DialogsPageType, UsersPageType } from "./store"
+import store from './store'
 
 const ADD_MESSAGE = "ADD-MESSAGE"
 const ON_CHANGE_MESSAGE_FIELD = "ON-CHANGE-MESSAGE-FIELD"
@@ -7,18 +9,10 @@ export type UsersReducerActionType = {
     text: string
 }
 
-const initialState = {
-    users: [
-        {id: 1, name: "Galina", isFriend: false},
-        {id: 1, name: "Gena", isFriend: true},
-        {id: 1, name: "Gleb", isFriend: false},
-        {id: 1, name: "Grigorii", isFriend: true},
-        {id: 1, name: "Gurudji", isFriend: false},
-    ]
-}
+const initialState = store.getState().usersPage
 
 
-const usersReducer = (state: DialogsPageType = initialState, action: UsersReducerActionType) => {
+const usersReducer = (state: UsersPageType = initialState, action: UsersReducerActionType) => {
     switch (action.type) {
         default:
             return state
