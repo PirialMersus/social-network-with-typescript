@@ -16,6 +16,7 @@ const Users: React.FC<UsersPropsType> = ({usersPage}) => {
                 name={user.name}
                 imgAddress={user.imgAddress}
                 isFriend={user.isFriend}
+                location={user.location}
             />
         )
     })
