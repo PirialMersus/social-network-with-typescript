@@ -10,6 +10,7 @@ import Settings from "./components/Settings/Settings";
 import {RootStateType} from "./redux/store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Users from './components/Users/Users';
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 type AppPropsType = {
@@ -38,7 +39,7 @@ const App = (props: AppPropsType) => {
                         path='/users'
                         render={
                             () =>
-                                <Users/>
+                                <UsersContainer/>
                         }
                     />
                     <Route path='/news' component={News}/>
