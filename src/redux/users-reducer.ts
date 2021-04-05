@@ -1,13 +1,25 @@
-import {UsersPageType, UserType} from "./store"
+import {UsersPageType} from "./store"
 
 const FOLLOW = "FOLLOW"
 const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
 
+export type UserResponseType = {
+    name: string
+    id: number
+    uniqueUrlName: string | null
+    photos: {
+        small: string | null
+        large: string | null
+    },
+    status: string | null
+    followed: false
+}
+
 export type FollowUnfollowActionType = {
     type: "FOLLOW" | "UNFOLLOW" | "SET_USERS"
     id: number
-    users: Array<UserType>
+    users: Array<UserResponseType>
 }
 
 const initialState = {users: []}
@@ -19,7 +31,7 @@ const usersReducer = (state: UsersPageType = initialState, action: FollowUnfollo
             return {
                 ...state, users: state.users.map(user => {
                     if (user.id === action.id) {
-                        return {...user, isFriend: true}
+                        return {...user, followed: true}
                     } else {
                         return user
                     }
@@ -29,7 +41,7 @@ const usersReducer = (state: UsersPageType = initialState, action: FollowUnfollo
             return {
                 ...state, users: state.users.map(user => {
                     if (user.id === action.id) {
-                        return {...user, isFriend: false}
+                        return {...user, followed: false}
                     } else {
                         return user
                     }
@@ -46,6 +58,6 @@ const usersReducer = (state: UsersPageType = initialState, action: FollowUnfollo
 
 export const followActionCreator = (id: number) => ({type: FOLLOW, id})
 export const unfollowActionCreator = (id: number) => ({type: UNFOLLOW, id})
-export const setUsersActionCreator = (users: Array<UserType>) => ({type: SET_USERS, users})
+export const setUsersActionCreator = (users: Array<UserResponseType>) => ({type: SET_USERS, users})
 
 export default usersReducer

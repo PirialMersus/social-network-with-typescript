@@ -1,13 +1,14 @@
 import React from "react";
 import s from "./User.module.css"
+import defaultUserPhoto from "./../../../img/defaultAva.jpg"
 
 type UserPropsType = {
     id: number
     name: string
-    imgAddress: string
+    imgAddress: string | null
     isFriend: boolean
-    location: string
-    status: string
+    location: string | null
+    status: string | null
     follow: (id: number) => void
     unfollow: (id: number) => void
 }
@@ -31,7 +32,7 @@ const User: React.FC<UserPropsType> = ({
     return (
         <div className={s.userWrapper}>
             <div className={s.avaAndFollowButtonBlock}>
-                <img src={imgAddress} alt="user img"/>
+                <img src={imgAddress ? imgAddress : defaultUserPhoto} alt="user img"/>
                 {isFriend ?
                     <button onClick={unfollowHandler}>unfollow</button> :
                     <button onClick={followHandler}>follow</button>

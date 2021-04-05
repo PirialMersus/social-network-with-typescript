@@ -1,6 +1,19 @@
 import dialogsReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
 import sidebarReducer from "./sidebar-reducer";
+import {UserResponseType} from "./users-reducer";
+
+// export type UserResponseType = {
+//     name: string
+//     id: number
+//     uniqueUrlName: string | null
+//     photos: {
+//         small: string | null
+//         large: string | null
+//     },
+//     status: string | null
+//     followed: false
+// }
 
 export type FriendType = {
     id: number
@@ -35,16 +48,9 @@ export type ActionType = {
     type: string
     text?: string
 }
-export type UserType = {
-    id: number
-    imgAddress: string
-    name: string
-    isFriend: boolean
-    location: string
-    status: string
-}
+
 export type UsersPageType = {
-    users: Array<UserType>
+    users: Array<UserResponseType>
 }
 export type RootStateType = {
     usersPage: UsersPageType
