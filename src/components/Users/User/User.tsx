@@ -7,6 +7,9 @@ type UserPropsType = {
     imgAddress: string
     isFriend: boolean
     location: string
+    status: string
+    follow: (id: number) => void
+    unfollow: (id: number) => void
 }
 
 const User: React.FC<UserPropsType> = ({
@@ -14,18 +17,32 @@ const User: React.FC<UserPropsType> = ({
                                            name,
                                            imgAddress,
                                            isFriend,
-                                           location
+                                           location,
+                                           status,
+                                           follow,
+                                           unfollow
                                        }) => {
-
+    const followHandler = () => {
+        follow(id)
+    }
+    const unfollowHandler = () => {
+        unfollow(id)
+    }
     return (
         <div className={s.userWrapper}>
-            <div className={s.user}>
+            <div className={s.avaAndFollowButtonBlock}>
                 <img src={imgAddress} alt="user img"/>
-                <button>{isFriend ? "unfollow" : "follow"}</button>
+                {isFriend ?
+                    <button onClick={unfollowHandler}>unfollow</button> :
+                    <button onClick={followHandler}>follow</button>
+                }
             </div>
-            <div className={s.decription}>
-                <p>{name}</p>
-                <p></p>
+            <div className={s.descriptionBlock}>
+                <div className={s.nameAndLocation}>
+                    <p>{name}</p>
+                    <p>{location}</p>
+                </div>
+                <span>{status}</span>
             </div>
         </div>
     )

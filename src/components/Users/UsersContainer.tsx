@@ -1,8 +1,8 @@
 import React, {Dispatch} from "react";
-import {addMessageActionCreator, onChangeMessageFieldActionCreator} from "../../redux/dialogs-reducer";
 import Users from "./Users";
 import {connect} from "react-redux";
-import {RootStateType} from "../../redux/store";
+import {RootStateType, UserType} from "../../redux/store";
+import {followActionCreator, setUsersActionCreator, unfollowActionCreator} from "../../redux/users-reducer";
 
 
 const mapStateToProps = (state: RootStateType) => {
@@ -12,11 +12,14 @@ const mapStateToProps = (state: RootStateType) => {
 }
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     return {
-        onChangeFunction: (message: string) => {
-            dispatch(onChangeMessageFieldActionCreator(message))
+        follow: (id: number) => {
+            dispatch(followActionCreator(id))
         },
-        addNewMessage: () => {
-            dispatch(addMessageActionCreator())
+        unfollow: (id: number) => {
+            dispatch(unfollowActionCreator(id))
+        },
+        setUsers: (users: Array<UserType>) => {
+            dispatch(setUsersActionCreator(users))
         }
     }
 }

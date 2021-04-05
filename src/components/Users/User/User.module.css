@@ -1,3 +1,56 @@
 .userWrapper {
+    margin-bottom: 20px;
+    display: flex;
+}
 
+.userWrapper:last-child {
+    margin-bottom: 0;
+}
+
+
+.avaAndFollowButtonBlock {
+    text-align: center;
+    display: inline-block;
+    margin-right: 40px;
+    min-width: 80px;
+}
+
+.avaAndFollowButtonBlock > img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.avaAndFollowButtonBlock > button {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.descriptionBlock {
+    min-width: 300px;
+    padding: 10px;
+    border: 1px solid #111;
+    border-radius: 10px;
+    background-color: white;
+    position: relative;
+}
+
+.descriptionBlock .nameAndLocation {
+    display: flex;
+    justify-content: space-between;
+}
+
+.descriptionBlock .nameAndLocation > p {
+    margin: 0;
+    padding: 0;
+
+}
+
+.descriptionBlock > span {
+    position: absolute;
+    bottom: 5px;
+    font-size: 14px;
 }
