@@ -1,9 +1,8 @@
 import React from "react";
 import s from "./Users.module.css"
-import {UsersPageType} from "../../redux/store";
 import User from "./User/User";
 import axios, {AxiosResponse} from "axios";
-import {UserResponseType} from "../../redux/users-reducer";
+import {UserResponseType, UsersPageType} from "../../redux/users-reducer";
 
 type UsersPropsType = {
     usersPage: UsersPageType

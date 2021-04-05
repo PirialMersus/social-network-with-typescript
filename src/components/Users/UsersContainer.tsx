@@ -2,12 +2,12 @@ import React from "react";
 import Users from "./Users";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {RootStateType, UsersPageType} from "../../redux/store";
 import {
     followActionCreator,
     setUsersActionCreator,
     unfollowActionCreator,
-    UserResponseType
+    UserResponseType,
+    UsersPageType
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
 
