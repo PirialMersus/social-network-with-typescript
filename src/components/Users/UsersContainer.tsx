@@ -11,9 +11,9 @@ import {
 } from "../../redux/users-reducer";
 import {AppStateType} from "../../redux/redux-store";
 
-type MapStatePropsType = {
-    usersPage: UsersPageType
-}
+// type MapStatePropsType = {
+//     usersPage: UsersPageType
+// }
 
 const mapStateToProps = (state: AppStateType) => {
     return {

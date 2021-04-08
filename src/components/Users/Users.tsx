@@ -1,8 +1,8 @@
 import React from "react";
 import s from "./Users.module.css"
-import User from "./User/User";
 import axios, {AxiosResponse} from "axios";
 import {UserResponseType, UsersPageType} from "../../redux/users-reducer";
+import User from "./User/User";
 
 type UsersPropsType = {
     usersPage: UsersPageType
@@ -11,33 +11,40 @@ type UsersPropsType = {
     setUsers: (users: Array<UserResponseType>) => void
 }
 
-const Users: React.FC<UsersPropsType> = ({usersPage, follow, unfollow, setUsers}) => {
-    if (usersPage.users.length === 0 ) {
-    axios.get("https://social-network.samuraijs.com/api/1.0/users")
-        .then((response: AxiosResponse) => {
-            setUsers(response.data.items)
-        })
+class Users extends React.Component<UsersPropsType> {
+
+    constructor(props: UsersPropsType) {
+        super(props);
+
+        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            .then((response: AxiosResponse) => {
+                this.props.setUsers(response.data.items)
+            })
     }
-    const usersToRender = usersPage.users.map(user => {
+
+
+    render() {
         return (
-            <User
-                key={user.id}
-                id={user.id}
-                name={user.name}
-                imgAddress={user.photos.large || user.photos.small}
-                isFriend={user.followed}
-                location={user.uniqueUrlName}
-                status={user.status}
-                follow={follow}
-                unfollow={unfollow}
-            />
+            <div className={s.usersWrapper}>
+                <h2>Users</h2>
+                {this.props.usersPage.users.map(user => {
+                    return (
+                        <User
+                            key={user.id}
+                            id={user.id}
+                            name={user.name}
+                            imgAddress={user.photos.large || user.photos.small}
+                            isFriend={user.followed}
+                            location={user.uniqueUrlName}
+                            status={user.status}
+                            follow={this.props.follow}
+                            unfollow={this.props.unfollow}
+                        />
+                    )
+                })}
+            </div>
         )
-    })
-    return (
-        <div className={s.usersWrapper}>
-            <h2>Users</h2>
-            {usersToRender}
-        </div>
-    )
+    }
 }
+
 export default Users
