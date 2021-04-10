@@ -2,7 +2,6 @@ import React from "react";
 import s from "./Users.module.css"
 import {UserResponseType, UsersPageType} from "../../redux/users-reducer";
 import User from "./User/User";
-import {v1} from "uuid";
 
 type UsersPropsType = {
     usersPage: UsersPageType
