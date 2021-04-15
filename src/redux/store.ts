@@ -2,6 +2,7 @@ import dialogsReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import {UserResponseType} from "./users-reducer";
+import {ProfileResponseType} from "../components/Profile/ProfileContainer";
 
 // export type UserResponseType = {
 //     name: string
@@ -37,6 +38,7 @@ export type DialogType = {
 export type ProfilePageType = {
     posts: Array<PostType>
     tempPostValue: string
+    profile: ProfileResponseType | null
 }
 export type DialogsPageType = {
     messages: Array<MessagesType>
@@ -78,7 +80,8 @@ const store: RootStoreType = {
                 {id: 5, message: "sdfsdfs", likesCount: 100},
                 {id: 6, message: "Привет из Одессы", likesCount: 53},
             ],
-            tempPostValue: ''
+            tempPostValue: '',
+            profile: null
         },
         usersPage: {
             users: [

@@ -1,8 +1,14 @@
+import {ProfileResponseType} from "../components/Profile/ProfileContainer";
 import {ProfilePageType} from "./store";
 
 const ADD_POST = "ADD-POST"
 const ON_CHANGE_POST_FIELD = "ON-CHANGE-POST-FIELD"
+const SET_USER_PROFILE = "SET_USER_PROFILE"
 
+type SetUserProfileType = {
+    type: "SET_USER_PROFILE"
+    userInfo: ProfileResponseType
+}
 export type ProfileReducerActionType = {
     type: "ADD-POST" | "ON-CHANGE-POST-FIELD"
     text: string
@@ -17,15 +23,17 @@ const initialState = {
         {id: 5, message: "sdfsdfs", likesCount: 100},
         {id: 6, message: "sdfsdfs", likesCount: 53},
     ],
-    tempPostValue: ''
+    tempPostValue: '',
+    profile: null
 }
 
 export const addPostActionCreator = () => ({type: ADD_POST})
+export const setUserProfile = (userInfo: ProfileResponseType) => ({type: SET_USER_PROFILE, userInfo})
 export const updateNewPostTextActionCreator = (text: string) => (
     {type: ON_CHANGE_POST_FIELD, text}
 )
 
-const profileReducer = (state: ProfilePageType = initialState, action: ProfileReducerActionType) => {
+const profileReducer = (state: ProfilePageType = initialState, action: ProfileReducerActionType | SetUserProfileType) => {
     switch (action.type) {
         case ADD_POST:
             const newPost = {
@@ -33,8 +41,6 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
                 message: state.tempPostValue,
                 likesCount: 0
             }
-            // state.posts.push(newPost)
-            // state.tempPostValue = ''
             return {
                 ...state,
                 posts: [...state.posts, newPost],
@@ -45,8 +51,11 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
                 ...state,
                 tempPostValue: action.text
             }
-            // state.tempPostValue = action.text
-            // return state
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                profile: action.userInfo
+            }
         default:
             return state
     }

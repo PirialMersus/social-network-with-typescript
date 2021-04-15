@@ -1,6 +1,7 @@
 import React from "react";
 import s from "./User.module.css"
 import defaultUserPhoto from "./../../../img/defaultAva.jpg"
+import {NavLink} from "react-router-dom";
 
 type UserPropsType = {
     id: number
@@ -32,7 +33,9 @@ const User: React.FC<UserPropsType> = ({
     return (
         <div className={s.userWrapper}>
             <div className={s.avaAndFollowButtonBlock}>
-                <img src={imgAddress ? imgAddress : defaultUserPhoto} alt="user img"/>
+                <NavLink to={'/profile/' + id}>
+                    <img src={imgAddress ? imgAddress : defaultUserPhoto} alt="user img"/>
+                </NavLink>
                 {isFriend ?
                     <button onClick={unfollowHandler}>unfollow</button> :
                     <button onClick={followHandler}>follow</button>
