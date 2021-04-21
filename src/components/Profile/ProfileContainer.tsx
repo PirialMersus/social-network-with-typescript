@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import Preloader from "../../common/Preloader/Preloder";
 import {setIsFetching} from "../../redux/users-reducer";
 import {setUserProfile} from "../../redux/profile-reducer";
+import { withRouter } from "react-router-dom";
 
 export type ProfileResponseType = {
     userId: number
@@ -61,6 +62,8 @@ const mapStateToProps = (state: AppStateType) => {
         profile: state.profilePage.profile
     }
 }
+
+const withUrlDataContainerComponent = withRouter(ProfileContainer)
 export default connect(mapStateToProps, {
     setIsFetching,
     setUserProfile
