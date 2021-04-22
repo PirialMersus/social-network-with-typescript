@@ -1,7 +1,31 @@
 .header {
     grid-area: h;
     background-color: aliceblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
 .header img {
     height: 60px;
+}
+
+.loginBlock {
+    margin-right: 10px;
+}
+
+.loginBlock a {
+    background-color: deepskyblue;
+    padding: 6px 12px;
+    border-radius: 10px;
+    color: #111;
+    transition: all 0.3s ease;
+}
+
+.loginBlock a:hover {
+    background-color: #4298ee;
+}
+.loginBlock p{
+    padding: 6px 12px;
+
 }

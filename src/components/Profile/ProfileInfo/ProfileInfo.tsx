@@ -2,7 +2,7 @@ import React from "react";
 import s from "./ProfileInfo.module.css"
 import {ProfileResponseType} from "../ProfileContainer";
 import defaultUserPhoto from "../../../img/defaultAva.jpg"
-import Preloader from "../../../common/Preloader/Preloder";
+import img from '../../../img/bg_mountains.jpg'
 
 
 type ProfileInfoPropsType = {
@@ -42,7 +42,10 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
             </div>
         )
     } else {
-        return <Preloader/>
+        return (
+            <div className={s.content}>
+                <img src={img} alt="ava"/>
+            </div>)
     }
 }
 export default ProfileInfo
