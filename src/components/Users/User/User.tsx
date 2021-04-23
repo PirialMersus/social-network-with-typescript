@@ -2,6 +2,7 @@ import React from "react";
 import s from "./User.module.css"
 import defaultUserPhoto from "./../../../img/defaultAva.jpg"
 import {NavLink} from "react-router-dom";
+import axios, {AxiosResponse} from "axios";
 
 type UserPropsType = {
     id: number
@@ -25,10 +26,32 @@ const User: React.FC<UserPropsType> = ({
                                            unfollow
                                        }) => {
     const followHandler = () => {
-        follow(id)
+        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
+            withCredentials: true,
+            headers: {
+                "API-KEY": "58f1b79a-5b08-4add-9043-639dedc61352"
+            }
+        })
+            .then((response: AxiosResponse) => {
+                if (response.data.resultCode === 0) {
+                    follow(id)
+                }
+            })
+
     }
     const unfollowHandler = () => {
-        unfollow(id)
+        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`,  {
+            withCredentials: true,
+            headers: {
+                "API-KEY": "58f1b79a-5b08-4add-9043-639dedc61352"
+            }
+        })
+            .then((response: AxiosResponse) => {
+                if (response.data.resultCode === 0) {
+                    unfollow(id)
+                }
+            })
+
     }
     return (
         <div className={s.userWrapper}>

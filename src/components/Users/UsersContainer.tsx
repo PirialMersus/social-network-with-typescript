@@ -33,7 +33,9 @@ class UsersContainer extends React.Component<UsersApiContainerPropsType> {
 
     componentDidMount() {
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
             .then((response: AxiosResponse) => {
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUsersCount(response.data.totalCount)
@@ -44,7 +46,10 @@ class UsersContainer extends React.Component<UsersApiContainerPropsType> {
     onclickHandler(currentPage: number) {
         this.props.setIsFetching(true)
         this.props.setCurrentPage(currentPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`,
+            {
+                withCredentials: true,
+            })
             .then((response: AxiosResponse) => {
                 this.props.setUsers(response.data.items)
                 this.props.setIsFetching(false)
