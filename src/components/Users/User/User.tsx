@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import s from "./User.module.css"
 import defaultUserPhoto from "./../../../img/defaultAva.jpg"
 import {NavLink} from "react-router-dom";
@@ -26,7 +26,10 @@ const User: React.FC<UserPropsType> = ({
                                            follow,
                                            unfollow
                                        }) => {
+
+    const [isDisabled, setIsDisabled] = useState(false)
     const followHandler = () => {
+        setIsDisabled(true)
         // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
         //     withCredentials: true,
         //     headers: {
@@ -38,10 +41,12 @@ const User: React.FC<UserPropsType> = ({
                 if (response.data.resultCode === 0) {
                     follow(id)
                 }
+                setIsDisabled(false)
             })
 
     }
     const unfollowHandler = () => {
+        setIsDisabled(true)
         // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`,  {
         //     withCredentials: true,
         //     headers: {
@@ -53,6 +58,7 @@ const User: React.FC<UserPropsType> = ({
                 if (response.data.resultCode === 0) {
                     unfollow(id)
                 }
+                setIsDisabled(false)
             })
 
     }
@@ -63,8 +69,8 @@ const User: React.FC<UserPropsType> = ({
                     <img src={imgAddress ? imgAddress : defaultUserPhoto} alt="user img"/>
                 </NavLink>
                 {isFriend ?
-                    <button onClick={unfollowHandler}>unfollow</button> :
-                    <button onClick={followHandler}>follow</button>
+                    <button onClick={unfollowHandler} disabled={isDisabled}>unfollow</button> :
+                    <button onClick={followHandler} disabled={isDisabled}>follow</button>
                 }
             </div>
             <div className={s.descriptionBlock}>
