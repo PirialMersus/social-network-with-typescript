@@ -14,6 +14,7 @@ import {AppStateType} from "../../redux/redux-store";
 import React from "react";
 import axios, {AxiosResponse} from "axios";
 import Preloader from "../../common/Preloader/Preloder";
+import {API} from "../../api/api";
 
 type UsersApiContainerPropsType = {
     usersPage: UsersPageType
@@ -28,17 +29,22 @@ type UsersApiContainerPropsType = {
     currentPage: number
     isFetching: boolean
 }
+type DataResponseType = {
+    items: Array<UserResponseType>
+    totalCount: number
+}
 
 class UsersContainer extends React.Component<UsersApiContainerPropsType> {
 
     componentDidMount() {
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-            withCredentials: true
-        })
-            .then((response: AxiosResponse) => {
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+        API.getUsers(this.props.currentPage, this.props.pageSize)
+            // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+            //     withCredentials: true
+            // })
+            .then((data: DataResponseType) => {
+                this.props.setUsers(data.items)
+                this.props.setTotalUsersCount(data.totalCount)
                 this.props.setIsFetching(false)
             })
     }
@@ -46,12 +52,13 @@ class UsersContainer extends React.Component<UsersApiContainerPropsType> {
     onclickHandler(currentPage: number) {
         this.props.setIsFetching(true)
         this.props.setCurrentPage(currentPage)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`,
-            {
-                withCredentials: true,
-            })
-            .then((response: AxiosResponse) => {
-                this.props.setUsers(response.data.items)
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${this.props.pageSize}`,
+        //     {
+        //         withCredentials: true,
+        //     })
+        API.getUsers(currentPage, this.props.pageSize)
+            .then((data: DataResponseType) => {
+                this.props.setUsers(data.items)
                 this.props.setIsFetching(false)
             })
     }
@@ -78,7 +85,15 @@ class UsersContainer extends React.Component<UsersApiContainerPropsType> {
     }
 }
 
-const mapStateToProps = (state: AppStateType) => {
+type MapStatePropsType = {
+    usersPage: UsersPageType
+    currentPage: number
+    totalUsersCount: number
+    pageSize: number
+    isFetching: boolean
+}
+
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         usersPage: state.usersPage,
         currentPage: state.usersPage.currentPage,

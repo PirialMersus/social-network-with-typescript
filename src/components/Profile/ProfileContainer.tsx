@@ -7,6 +7,7 @@ import Preloader from "../../common/Preloader/Preloder";
 import {setIsFetching} from "../../redux/users-reducer";
 import {setUserProfile} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {API} from "../../api/api";
 
 export type ProfileResponseType = {
 
@@ -47,7 +48,8 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId || this.props.userId || "2"
         this.props.setIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+        API.getUserProfile(userId)
             .then((response: AxiosResponse) => {
                 this.props.setUserProfile(response.data)
                 this.props.setIsFetching(false)
