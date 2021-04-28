@@ -3,7 +3,7 @@ import s from "./User.module.css"
 import defaultUserPhoto from "./../../../img/defaultAva.jpg"
 import {NavLink} from "react-router-dom";
 import axios, {AxiosResponse} from "axios";
-import {API} from "../../../api/api";
+import {usersAPI} from "../../../api/usersAPI";
 
 type UserPropsType = {
     id: number
@@ -14,6 +14,7 @@ type UserPropsType = {
     status: string | null
     follow: (id: number) => void
     unfollow: (id: number) => void
+    followedIDs: Array<number>
 }
 
 const User: React.FC<UserPropsType> = ({
@@ -24,42 +25,34 @@ const User: React.FC<UserPropsType> = ({
                                            location,
                                            status,
                                            follow,
-                                           unfollow
+                                           unfollow,
+                                           followedIDs
                                        }) => {
 
-    const [isDisabled, setIsDisabled] = useState(false)
+    // const [isDisabled, setIsDisabled] = useState(false)
+    // debugger
     const followHandler = () => {
-        setIsDisabled(true)
-        // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
-        //     withCredentials: true,
-        //     headers: {
-        //         "API-KEY": "58f1b79a-5b08-4add-9043-639dedc61352"
-        //     }
-        // })
-        API.follow(id)
-            .then((response: AxiosResponse) => {
-                if (response.data.resultCode === 0) {
-                    follow(id)
-                }
-                setIsDisabled(false)
-            })
+        // setIsDisabled(true)
+        follow(id)
+        // usersAPI.follow(id)
+        //     .then((response: AxiosResponse) => {
+        //         if (response.data.resultCode === 0) {
+        //             follow(id)
+        //         }
+        //         setIsDisabled(false)
+        //     })
 
     }
     const unfollowHandler = () => {
-        setIsDisabled(true)
-        // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`,  {
-        //     withCredentials: true,
-        //     headers: {
-        //         "API-KEY": "58f1b79a-5b08-4add-9043-639dedc61352"
-        //     }
-        // })
-        API.unfollow(id)
-            .then((response: AxiosResponse) => {
-                if (response.data.resultCode === 0) {
-                    unfollow(id)
-                }
-                setIsDisabled(false)
-            })
+        // setIsDisabled(true)
+        unfollow(id)
+        // usersAPI.unfollow(id)
+        //     .then((response: AxiosResponse) => {
+        //         if (response.data.resultCode === 0) {
+        //             unfollow(id)
+        //         }
+        //         setIsDisabled(false)
+        //     })
 
     }
     return (
@@ -68,9 +61,15 @@ const User: React.FC<UserPropsType> = ({
                 <NavLink to={'/profile/' + id}>
                     <img src={imgAddress ? imgAddress : defaultUserPhoto} alt="user img"/>
                 </NavLink>
-                {isFriend ?
-                    <button onClick={unfollowHandler} disabled={isDisabled}>unfollow</button> :
-                    <button onClick={followHandler} disabled={isDisabled}>follow</button>
+                {isFriend
+                    ? <button
+                        onClick={unfollowHandler}
+                        disabled={followedIDs.some(el => el === id)}>unfollow
+                    </button>
+                    : <button
+                        onClick={followHandler}
+                        disabled={followedIDs.some(el => el === id)}>follow
+                    </button>
                 }
             </div>
             <div className={s.descriptionBlock}>

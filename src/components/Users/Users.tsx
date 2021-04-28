@@ -1,21 +1,20 @@
 import React from "react";
 import s from "./Users.module.css"
-import {UserResponseType, UsersPageType} from "../../redux/users-reducer";
+import {UsersPageType} from "../../redux/users-reducer";
 import User from "./User/User";
 
 type UsersPropsType = {
     usersPage: UsersPageType
     follow: (id: number) => void
     unfollow: (id: number) => void
-    setUsers: (users: Array<UserResponseType>) => void
     pageSize: number
     totalUsersCount: number
     currentPage: number
     onclickHandler: (currentPage: number) => void
+    followedIDs: Array<number>
 }
 
 const Users = (props: UsersPropsType) => {
-
     const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     const spansArray = []
     for (let i = 1; i <= pagesCount; i++) {
@@ -39,6 +38,7 @@ const Users = (props: UsersPropsType) => {
             {props.usersPage.users.map(user => {
                 return (
                     <User
+                        followedIDs={props.followedIDs}
                         key={user.id}
                         // key={v1()}
                         id={user.id}
