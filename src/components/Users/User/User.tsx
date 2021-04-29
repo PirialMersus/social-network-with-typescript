@@ -1,9 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import s from "./User.module.css"
 import defaultUserPhoto from "./../../../img/defaultAva.jpg"
 import {NavLink} from "react-router-dom";
-import axios, {AxiosResponse} from "axios";
-import {usersAPI} from "../../../api/usersAPI";
 
 type UserPropsType = {
     id: number
@@ -29,31 +27,13 @@ const User: React.FC<UserPropsType> = ({
                                            followedIDs
                                        }) => {
 
-    // const [isDisabled, setIsDisabled] = useState(false)
-    // debugger
+
     const followHandler = () => {
-        // setIsDisabled(true)
         follow(id)
-        // usersAPI.follow(id)
-        //     .then((response: AxiosResponse) => {
-        //         if (response.data.resultCode === 0) {
-        //             follow(id)
-        //         }
-        //         setIsDisabled(false)
-        //     })
-
     }
-    const unfollowHandler = () => {
-        // setIsDisabled(true)
-        unfollow(id)
-        // usersAPI.unfollow(id)
-        //     .then((response: AxiosResponse) => {
-        //         if (response.data.resultCode === 0) {
-        //             unfollow(id)
-        //         }
-        //         setIsDisabled(false)
-        //     })
 
+    const unfollowHandler = () => {
+        unfollow(id)
     }
     return (
         <div className={s.userWrapper}>

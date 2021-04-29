@@ -1,5 +1,4 @@
-import {usersAPI} from "../api/usersAPI";
-import {HandleThunkActionCreator} from "react-redux";
+import {usersAPI} from "../api/API";
 import {Dispatch} from "redux";
 import {AxiosResponse} from "axios";
 

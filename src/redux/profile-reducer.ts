@@ -1,5 +1,9 @@
 import {ProfileResponseType} from "../components/Profile/ProfileContainer";
 import {ProfilePageType} from "./store";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/API";
+import {AxiosResponse} from "axios";
+import {followUnfollowSwitch, setIsFetching, unfollowSuccess} from "./users-reducer";
 
 const ADD_POST = "ADD-POST"
 const ON_CHANGE_POST_FIELD = "ON-CHANGE-POST-FIELD"
@@ -59,6 +63,17 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
         default:
             return state
     }
-
 }
+
+export const getUserProfileThunkCreator = (userId: number | string) => {
+    return (dispatch: Dispatch) => {
+        dispatch(setIsFetching(true))
+        usersAPI.getUserProfile(userId)
+            .then((response: AxiosResponse) => {
+                dispatch(setUserProfile(response.data))
+                dispatch(setIsFetching(false))
+            })
+    }
+}
+
 export default profileReducer

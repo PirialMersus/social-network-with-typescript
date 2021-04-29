@@ -3,11 +3,13 @@ import Header from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import axios, {AxiosResponse} from "axios";
-import {setUserDataAC} from "../../redux/auth-reducer";
+import {setUserDataAC, getMeThunkCreator} from "../../redux/auth-reducer";
+import { authAPI } from "../../api/API";
 
 type HeaderContainerPropsType = {
     login: string | null
     setUserDataAC: (userId: number, login: string, email: string) => void
+    getMeThunkCreator: () => void
 }
 
 type AuthResponseType = {
@@ -23,17 +25,13 @@ type AuthResponseType = {
 class HeaderContainer extends React.Component<HeaderContainerPropsType> {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-            withCredentials: true,
-            headers: {
-                "API-KEY": "58f1b79a-5b08-4add-9043-639dedc61352"
-            }
-        })
-            .then((response: AxiosResponse) => {
-                if (response.data.resultCode === 0) {
-                    this.props.setUserDataAC(response.data.data.id, response.data.data.login, response.data.data.email)
-                }
-            })
+        this.props.getMeThunkCreator()
+        // authAPI.getMe()
+        //     .then((response: AxiosResponse) => {
+        //         if (response.data.resultCode === 0) {
+        //             this.props.setUserDataAC(response.data.data.id, response.data.data.login, response.data.data.email)
+        //         }
+        //     })
     }
 
     render() {
@@ -50,5 +48,5 @@ const mapStateToProps = (state: AppStateType) => {
 }
 
 export default connect(mapStateToProps, {
-    setUserDataAC,
+    setUserDataAC, getMeThunkCreator
 })(HeaderContainer)

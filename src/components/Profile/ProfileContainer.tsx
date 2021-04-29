@@ -1,13 +1,10 @@
 import React from "react";
 import Profile from "./Profile";
-import axios, {AxiosResponse} from "axios";
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
-import Preloader from "../../common/Preloader/Preloder";
 import {setIsFetching} from "../../redux/users-reducer";
-import {setUserProfile} from "../../redux/profile-reducer";
+import {getUserProfileThunkCreator, setUserProfile} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {usersAPI} from "../../api/usersAPI";
 
 export type ProfileResponseType = {
 
@@ -41,32 +38,22 @@ type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & {
     isFetching: boolean
     setIsFetching: (isFetching: boolean) => void
     setUserProfile: (UserInfo: ProfileResponseType) => void
+    getUserProfileThunkCreator: (userId: number | string) => void
 }
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId || this.props.userId || "2"
-        this.props.setIsFetching(true)
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-        usersAPI.getUserProfile(userId)
-            .then((response: AxiosResponse) => {
-                this.props.setUserProfile(response.data)
-                this.props.setIsFetching(false)
-            })
+        this.props.getUserProfileThunkCreator(userId)
+
     }
 
     render() {
         return (
-            // <>{this.props.isFetching
-            //     ? <Preloader/>
-            //     : <Profile {...this.props} profile={this.props.profile}/>}
-            // </>)
             <Profile {...this.props} profile={this.props.profile}/>)
     }
-
 }
-
 
 const mapStateToProps = (state: AppStateType) => {
     return {
@@ -80,5 +67,6 @@ const withUrlDataContainerComponent = withRouter(ProfileContainer)
 
 export default connect(mapStateToProps, {
     setIsFetching,
-    setUserProfile
+    setUserProfile,
+    getUserProfileThunkCreator
 })(withUrlDataContainerComponent)

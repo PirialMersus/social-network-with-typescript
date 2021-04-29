@@ -1,3 +1,8 @@
+import {Dispatch} from "redux";
+import {authAPI, usersAPI} from "../api/API";
+import {AxiosResponse} from "axios";
+import {followSuccess, followUnfollowSwitch} from "./users-reducer";
+
 const SET_USER_DATA = "SET_USER_DATA"
 
 
@@ -63,7 +68,17 @@ export const setUserDataAC = (userId: number, login: string, email: string) => (
         login,
         email
     }
-
 })
+
+export const getMeThunkCreator = () => {
+    return (dispatch: Dispatch) => {
+        authAPI.getMe()
+            .then((response: AxiosResponse) => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setUserDataAC(response.data.data.id, response.data.data.login, response.data.data.email))
+                }
+            })
+    }
+}
 
 export default authReducer
