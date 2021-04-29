@@ -3,7 +3,7 @@ import {ProfilePageType} from "./store";
 import {Dispatch} from "redux";
 import {usersAPI} from "../api/API";
 import {AxiosResponse} from "axios";
-import {followUnfollowSwitch, setIsFetching, unfollowSuccess} from "./users-reducer";
+import {setIsFetching} from "./users-reducer";
 
 const ADD_POST = "ADD-POST"
 const ON_CHANGE_POST_FIELD = "ON-CHANGE-POST-FIELD"

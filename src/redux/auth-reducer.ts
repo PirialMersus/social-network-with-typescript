@@ -1,7 +1,6 @@
 import {Dispatch} from "redux";
-import {authAPI, usersAPI} from "../api/API";
+import {authAPI} from "../api/API";
 import {AxiosResponse} from "axios";
-import {followSuccess, followUnfollowSwitch} from "./users-reducer";
 
 const SET_USER_DATA = "SET_USER_DATA"
 
@@ -36,6 +35,7 @@ export type AuthStateType = {
     id: number | null
     login: string | null
     email: string | null
+    isAuth: boolean
 }
 
 type ActionsType = SetUserDataActionType
@@ -44,7 +44,8 @@ type ActionsType = SetUserDataActionType
 const initialState: AuthStateType = {
     id: null,
     login: null,
-    email: null
+    email: null,
+    isAuth: false
 }
 
 
@@ -53,7 +54,8 @@ const authReducer = (state = initialState, action: ActionsType): AuthStateType =
         case "SET_USER_DATA":
             return {
                 ...state,
-                ...action.data
+                ...action.data,
+                isAuth: true
             }
 
         default:
