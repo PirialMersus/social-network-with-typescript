@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {setIsFetching} from "../../redux/users-reducer";
 import {getUserProfileThunkCreator, setUserProfile} from "../../redux/profile-reducer";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 
 export type ProfileResponseType = {
 
@@ -33,7 +34,6 @@ type PathParamsType = {
 }
 
 type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & {
-    isAuth: boolean
     userId: number | undefined
     profile: ProfileResponseType | null
     isFetching: boolean
@@ -51,9 +51,6 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     }
 
     render() {
-        if(!this.props.isAuth){
-            return <Redirect to='/login'/>
-        }
         return (
             <Profile {...this.props} profile={this.props.profile}/>)
     }
@@ -61,14 +58,15 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
 const mapStateToProps = (state: AppStateType) => {
     return {
-        isAuth: state.auth.isAuth,
         isFetching: state.usersPage.isFetching,
         profile: state.profilePage.profile,
         userId: state.profilePage.profile?.userId
     }
 }
 
-const withUrlDataContainerComponent = withRouter(ProfileContainer)
+const ProfileWithAuthRedirect = withAuthRedirect(ProfileContainer)
+
+const withUrlDataContainerComponent = withRouter(ProfileWithAuthRedirect)
 
 export default connect(mapStateToProps, {
     setIsFetching,

@@ -4,6 +4,7 @@ import {follow, getUsersThunkCreator, unfollow, UsersPageType} from "../../redux
 import {AppStateType} from "../../redux/redux-store";
 import React from "react";
 import Preloader from "../../common/Preloader/Preloder";
+import { withAuthRedirect } from "../../HOC/withAuthRedirect";
 
 type UsersApiContainerPropsType = {
     followedIDs: Array<number>
@@ -22,26 +23,10 @@ class UsersContainer extends React.Component<UsersApiContainerPropsType> {
 
     componentDidMount() {
         this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
-        // this.props.setIsFetching(true)
-        // API.getUsers(this.props.currentPage, this.props.pageSize)
-        //     .then((data: DataResponseType) => {
-        //         this.props.setUsers(data.items)
-        //         this.props.setTotalUsersCount(data.totalCount)
-        //         this.props.setIsFetching(false)
-        //     })
     }
 
     onclickHandler(currentPage: number) {
         this.props.getUsersThunkCreator(currentPage, this.props.pageSize)
-        // this.props.setCurrentPage(currentPage)
-
-        // this.props.setIsFetching(true)
-        // this.props.setCurrentPage(currentPage)
-        // API.getUsers(currentPage, this.props.pageSize)
-        //     .then((data: DataResponseType) => {
-        //         this.props.setUsers(data.items)
-        //         this.props.setIsFetching(false)
-        //     })
     }
 
 
@@ -86,8 +71,10 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
+const WithRedirectUsers = withAuthRedirect(UsersContainer)
+
 export default connect(mapStateToProps, {
     follow,
     unfollow,
     getUsersThunkCreator,
-})(UsersContainer)
+})(WithRedirectUsers)
