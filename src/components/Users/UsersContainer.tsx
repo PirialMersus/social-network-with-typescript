@@ -5,6 +5,7 @@ import {AppStateType} from "../../redux/redux-store";
 import React from "react";
 import Preloader from "../../common/Preloader/Preloder";
 import { withAuthRedirect } from "../../HOC/withAuthRedirect";
+import { compose } from "redux";
 
 type UsersApiContainerPropsType = {
     followedIDs: Array<number>
@@ -71,10 +72,16 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-const WithRedirectUsers = withAuthRedirect(UsersContainer)
-
-export default connect(mapStateToProps, {
-    follow,
-    unfollow,
-    getUsersThunkCreator,
-})(WithRedirectUsers)
+// export default connect(mapStateToProps, {
+//     follow,
+//     unfollow,
+//     getUsersThunkCreator,
+// })(withAuthRedirect(UsersContainer))
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        follow,
+        unfollow,
+        getUsersThunkCreator,
+    }),
+    withAuthRedirect
+)(UsersContainer)

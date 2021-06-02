@@ -6,6 +6,7 @@ import {setIsFetching} from "../../redux/users-reducer";
 import {getUserProfileThunkCreator, setUserProfile} from "../../redux/profile-reducer";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
+import {compose} from "redux";
 
 export type ProfileResponseType = {
 
@@ -64,12 +65,13 @@ const mapStateToProps = (state: AppStateType) => {
     }
 }
 
-const ProfileWithAuthRedirect = withAuthRedirect(ProfileContainer)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        setIsFetching,
+        setUserProfile,
+        getUserProfileThunkCreator
+    }),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)
 
-const withUrlDataContainerComponent = withRouter(ProfileWithAuthRedirect)
-
-export default connect(mapStateToProps, {
-    setIsFetching,
-    setUserProfile,
-    getUserProfileThunkCreator
-})(withUrlDataContainerComponent)
