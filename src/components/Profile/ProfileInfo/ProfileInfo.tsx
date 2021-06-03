@@ -3,6 +3,7 @@ import s from "./ProfileInfo.module.css"
 import {ProfileResponseType} from "../ProfileContainer";
 import defaultUserPhoto from "../../../img/defaultAva.jpg"
 import img from '../../../img/bg_mountains.jpg'
+import Status from "./Status/Status";
 
 
 type ProfileInfoPropsType = {
@@ -23,6 +24,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                 <div className={s.descriptionBlock}>{props.profile.lookingForAJob}</div>
                 <div className={s.descriptionBlock}>{props.profile.lookingForAJobDescription}</div>
                 <div>
+                    <Status status='hello all'/>
                     <h3>Ссылки</h3>
                     {props.profile.contacts && props.profile.contacts.facebook &&
                     <div><a href={props.profile.contacts.facebook}>facebook</a></div>}
