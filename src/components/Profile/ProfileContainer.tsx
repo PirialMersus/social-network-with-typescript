@@ -35,6 +35,7 @@ type PathParamsType = {
 }
 
 type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & {
+    status: string
     userId: number | undefined
     profile: ProfileResponseType | null
     isFetching: boolean
@@ -61,7 +62,8 @@ const mapStateToProps = (state: AppStateType) => {
     return {
         isFetching: state.usersPage.isFetching,
         profile: state.profilePage.profile,
-        userId: state.profilePage.profile?.userId
+        userId: state.profilePage.profile?.userId,
+        status: state.profilePage.status
     }
 }
 

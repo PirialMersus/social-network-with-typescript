@@ -39,6 +39,7 @@ export type ProfilePageType = {
     posts: Array<PostType>
     tempPostValue: string
     profile: ProfileResponseType | null
+    status: string
 }
 export type DialogsPageType = {
     messages: Array<MessagesType>
@@ -81,7 +82,8 @@ const store: RootStoreType = {
                 {id: 6, message: "Привет из Одессы", likesCount: 53},
             ],
             tempPostValue: '',
-            profile: null
+            profile: null,
+            status: ''
         },
         usersPage: {
             users: [

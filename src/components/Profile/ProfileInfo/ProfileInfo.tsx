@@ -8,6 +8,7 @@ import Status from "./Status/Status";
 
 type ProfileInfoPropsType = {
     profile: ProfileResponseType | null
+    status: string
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
@@ -24,7 +25,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                 <div className={s.descriptionBlock}>{props.profile.lookingForAJob}</div>
                 <div className={s.descriptionBlock}>{props.profile.lookingForAJobDescription}</div>
                 <div>
-                    <Status status='hello all'/>
+                    <Status status={props.status}/>
                     <h3>Ссылки</h3>
                     {props.profile.contacts && props.profile.contacts.facebook &&
                     <div><a href={props.profile.contacts.facebook}>facebook</a></div>}

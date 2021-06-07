@@ -1,22 +1,14 @@
 import {ProfileResponseType} from "../components/Profile/ProfileContainer";
 import {ProfilePageType} from "./store";
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/API";
+import {authAPI, usersAPI} from "../api/API";
 import {AxiosResponse} from "axios";
 import {setIsFetching} from "./users-reducer";
+import {debuglog} from "util";
 
 const ADD_POST = "ADD-POST"
 const ON_CHANGE_POST_FIELD = "ON-CHANGE-POST-FIELD"
 const SET_USER_PROFILE = "SET_USER_PROFILE"
-
-type SetUserProfileType = {
-    type: "SET_USER_PROFILE"
-    userInfo: ProfileResponseType
-}
-export type ProfileReducerActionType = {
-    type: "ADD-POST" | "ON-CHANGE-POST-FIELD"
-    text: string
-}
 
 const initialState = {
     posts: [
@@ -28,16 +20,27 @@ const initialState = {
         {id: 6, message: "sdfsdfs", likesCount: 53},
     ],
     tempPostValue: '',
-    profile: null
+    profile: null,
+    status: '--------'
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const setUserProfile = (userInfo: ProfileResponseType) => ({type: SET_USER_PROFILE, userInfo})
-export const updateNewPostTextActionCreator = (text: string) => (
-    {type: ON_CHANGE_POST_FIELD, text}
-)
+export const addPostActionCreator = () => ({type: ADD_POST}) as const
+type AddPostActionType = ReturnType<typeof addPostActionCreator>
+export const setUserProfile = (userInfo: ProfileResponseType) => ({type: SET_USER_PROFILE, userInfo}) as const
+type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 
-const profileReducer = (state: ProfilePageType = initialState, action: ProfileReducerActionType | SetUserProfileType) => {
+export const updateNewPostTextActionCreator = (text: string) => (
+    {type: ON_CHANGE_POST_FIELD, text} as const
+)
+type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
+
+type ProfileReducerActionsType =
+    AddPostActionType
+    | SetUserProfileActionType
+    | UpdateNewPostTextActionType
+    | SetStatusActionType
+
+const profileReducer = (state: ProfilePageType = initialState, action: ProfileReducerActionsType): ProfilePageType => {
     switch (action.type) {
         case ADD_POST:
             const newPost = {
@@ -60,10 +63,23 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
                 ...state,
                 profile: action.userInfo
             }
+        case "SET_STATUS": {
+            return {...state, status: action.status}
+        }
         default:
             return state
     }
 }
+
+const setStatusAC = (status: string) => {
+    debugger
+
+    return ({
+        type: "SET_STATUS",
+        status
+    }) as const
+}
+type SetStatusActionType = ReturnType<typeof setStatusAC>
 
 export const getUserProfileThunkCreator = (userId: number | string) => {
     return (dispatch: Dispatch) => {
@@ -72,6 +88,18 @@ export const getUserProfileThunkCreator = (userId: number | string) => {
             .then((response: AxiosResponse) => {
                 dispatch(setUserProfile(response.data))
                 dispatch(setIsFetching(false))
+            })
+    }
+}
+
+export const setStatusThunkCreator = (status: string) => {
+    debugger
+    return (dispatch: Dispatch) => {
+        authAPI.setStatus(status)
+            .then((res) => {
+                debugger
+
+                dispatch(setStatusAC(status))
             })
     }
 }
