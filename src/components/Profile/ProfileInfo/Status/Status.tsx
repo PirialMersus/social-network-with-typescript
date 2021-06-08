@@ -5,13 +5,10 @@ import {useDispatch} from "react-redux";
 
 type StatusPropsType = {
     status: string
+    setStatusThunkCreator: (status: string) => void
 }
 
 class Status extends React.Component<StatusPropsType> {
-    constructor(props: any) {
-        super(props);
-        this.dispatch = useDispatch()
-    }
 
     state = {
         editMode: false,
@@ -24,13 +21,12 @@ class Status extends React.Component<StatusPropsType> {
             editMode: true
         })
     }
-    deactivateEditMode = (status: string) => {
-        debugger
-
+    deactivateEditMode = () => {
         this.setState({
             ...this.state,
             editMode: false
         })
+        this.props.setStatusThunkCreator(this.state.status)
     }
     onChangeHandler = (status: string) => {
         this.setState({
@@ -47,11 +43,11 @@ class Status extends React.Component<StatusPropsType> {
                        placeholder={this.state.status}
                        value={this.state.status}
                        onBlur={(e) => {
-                           this.deactivateEditMode(e.target.value)
+                           this.deactivateEditMode()
                        }}
                        onChange={(e) => {this.onChangeHandler(e.currentTarget.value)}}
                 />
-                : <span onDoubleClick={this.activateEditMode}>{this.state.status}</span>
+                : <span onDoubleClick={this.activateEditMode}>{this.props.status || '---------'}</span>
             }
         </div>;
     }

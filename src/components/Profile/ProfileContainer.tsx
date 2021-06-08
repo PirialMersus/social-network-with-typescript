@@ -3,7 +3,12 @@ import Profile from "./Profile";
 import {AppStateType} from "../../redux/redux-store";
 import {connect} from "react-redux";
 import {setIsFetching} from "../../redux/users-reducer";
-import {getUserProfileThunkCreator, setUserProfile} from "../../redux/profile-reducer";
+import {
+    getStatusThunkCreator,
+    getUserProfileThunkCreator,
+    setStatusThunkCreator,
+    setUserProfile
+} from "../../redux/profile-reducer";
 import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
@@ -42,19 +47,25 @@ type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & {
     setIsFetching: (isFetching: boolean) => void
     setUserProfile: (UserInfo: ProfileResponseType) => void
     getUserProfileThunkCreator: (userId: number | string) => void
+    setStatusThunkCreator: (status: string) => void
+    getStatusThunkCreator: (userId: number | string) => void
 }
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
     componentDidMount() {
-        let userId = this.props.match.params.userId || this.props.userId || "2"
+        let userId = this.props.match.params.userId || this.props.userId || "16687"
         this.props.getUserProfileThunkCreator(userId)
-
+        this.props.getStatusThunkCreator(userId)
     }
 
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile}/>)
+            <Profile {...this.props}
+                     profile={this.props.profile}
+                     status={this.props.status}
+                     setStatusThunkCreator={this.props.setStatusThunkCreator}
+            />)
     }
 }
 
@@ -71,7 +82,9 @@ export default compose<React.ComponentType>(
     connect(mapStateToProps, {
         setIsFetching,
         setUserProfile,
-        getUserProfileThunkCreator
+        getUserProfileThunkCreator,
+        setStatusThunkCreator,
+        getStatusThunkCreator
     }),
     withRouter,
     withAuthRedirect

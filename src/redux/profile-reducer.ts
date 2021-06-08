@@ -1,7 +1,7 @@
 import {ProfileResponseType} from "../components/Profile/ProfileContainer";
 import {ProfilePageType} from "./store";
 import {Dispatch} from "redux";
-import {authAPI, usersAPI} from "../api/API";
+import {authAPI, profileAPI, usersAPI} from "../api/API";
 import {AxiosResponse} from "axios";
 import {setIsFetching} from "./users-reducer";
 import {debuglog} from "util";
@@ -21,7 +21,7 @@ const initialState = {
     ],
     tempPostValue: '',
     profile: null,
-    status: '--------'
+    status: ''
 }
 
 export const addPostActionCreator = () => ({type: ADD_POST}) as const
@@ -72,8 +72,6 @@ const profileReducer = (state: ProfilePageType = initialState, action: ProfileRe
 }
 
 const setStatusAC = (status: string) => {
-    debugger
-
     return ({
         type: "SET_STATUS",
         status
@@ -93,15 +91,23 @@ export const getUserProfileThunkCreator = (userId: number | string) => {
 }
 
 export const setStatusThunkCreator = (status: string) => {
-    debugger
     return (dispatch: Dispatch) => {
-        authAPI.setStatus(status)
+        profileAPI.setStatus(status)
             .then((res) => {
-                debugger
-
-                dispatch(setStatusAC(status))
+                if (res.data.resultCode === 0) {
+                    dispatch(setStatusAC(status))
+                }
             })
     }
 }
+export const getStatusThunkCreator = (userId: number | string) => {
+    return (dispatch: Dispatch) => {
+        profileAPI.getStatus(userId)
+            .then((res) => {
+                dispatch(setStatusAC(res.data))
+            })
+    }
+}
+
 
 export default profileReducer
