@@ -34,6 +34,13 @@ class Status extends React.Component<StatusPropsType> {
             status
         })
     }
+    componentDidUpdate(prevProps: Readonly<StatusPropsType>, prevState: Readonly<{}>) {
+        if(prevProps.status !== this.props.status){
+            this.setState({
+                status: this.props.status
+            })
+        }
+    }
 
     render() {
         return <div className={s.spanWrap}>
