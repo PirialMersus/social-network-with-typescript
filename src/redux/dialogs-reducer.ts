@@ -1,20 +1,19 @@
-import {DialogsPageType} from "./store";
+import { DialogType, MessagesType} from "./store";
 
-const ADD_MESSAGE = "ADD-MESSAGE"
-const ON_CHANGE_MESSAGE_FIELD = "ON-CHANGE-MESSAGE-FIELD"
-
-export type DialogsReducerActionType = {
-    type: "ADD-MESSAGE" | "ON-CHANGE-MESSAGE-FIELD"
-    text: string
+export type DialogsPageType = {
+    messages: Array<MessagesType>
+    dialogs: Array<DialogType>
 }
 
-const initialState = {
+type DialogsReducerActionType = AddMessageActionCreatorType
+
+
+const initialState  = {
     messages: [
         {id: 1, message: "Hello"},
         {id: 2, message: "I am here"},
         {id: 3, message: "Man!!!"}
     ],
-    tempMessage: '',
     dialogs: [
         {name: 'God', id: 1, icon: "https://ichef.bbci.co.uk/images/ic/640xn/p06w97zx.jpg"},
         {
@@ -65,31 +64,33 @@ const initialState = {
 
 const dialogsReducer = (state: DialogsPageType = initialState, action: DialogsReducerActionType) => {
     switch (action.type) {
-        case ADD_MESSAGE:
+        case "ADD-MESSAGE":
             const newMessage = {
                 id: (state.messages.length + 1),
-                message: state.tempMessage,
+                message: action.message,
             }
-            return {...state,
+            return {
+                ...state,
                 messages: [...state.messages, newMessage],
                 tempMessage: ''
             }
-        case ON_CHANGE_MESSAGE_FIELD:
-            return {
-                ...state,
-                tempMessage: action.text
-            }
+        // case ON_CHANGE_MESSAGE_FIELD:
+        //     return {
+        //         ...state,
+        //         tempMessage: action.text
+        //     }
         default:
             return state
     }
 }
 
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE})
-export const onChangeMessageFieldActionCreator = (message: string) => (
-    {
-        type: ON_CHANGE_MESSAGE_FIELD,
-        text: message
-    }
-)
+export const addMessageActionCreator = (message: string) => ({type: "ADD-MESSAGE", message})
+export type AddMessageActionCreatorType = ReturnType<typeof addMessageActionCreator>
+// export const onChangeMessageFieldActionCreator = (message: string) => (
+//     {
+//         type: ON_CHANGE_MESSAGE_FIELD,
+//         text: message
+//     }
+// )
 
 export default dialogsReducer

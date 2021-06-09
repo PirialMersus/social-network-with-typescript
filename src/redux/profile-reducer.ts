@@ -1,14 +1,15 @@
 import {ProfileResponseType} from "../components/Profile/ProfileContainer";
-import {ProfilePageType} from "./store";
+import {PostType} from "./store";
 import {Dispatch} from "redux";
-import {authAPI, profileAPI, usersAPI} from "../api/API";
+import {profileAPI, usersAPI} from "../api/API";
 import {AxiosResponse} from "axios";
 import {setIsFetching} from "./users-reducer";
-import {debuglog} from "util";
 
-const ADD_POST = "ADD-POST"
-const ON_CHANGE_POST_FIELD = "ON-CHANGE-POST-FIELD"
-const SET_USER_PROFILE = "SET_USER_PROFILE"
+export type ProfilePageType = {
+    posts: Array<PostType>
+    profile: ProfileResponseType | null
+    status: string
+}
 
 const initialState = {
     posts: [
@@ -19,46 +20,34 @@ const initialState = {
         {id: 5, message: "sdfsdfs", likesCount: 100},
         {id: 6, message: "sdfsdfs", likesCount: 53},
     ],
-    tempPostValue: '',
     profile: null,
     status: ''
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST}) as const
+export const addPostActionCreator = (postText: string) => ({type: "ADD-POST", postText}) as const
 type AddPostActionType = ReturnType<typeof addPostActionCreator>
-export const setUserProfile = (userInfo: ProfileResponseType) => ({type: SET_USER_PROFILE, userInfo}) as const
+export const setUserProfile = (userInfo: ProfileResponseType) => ({type: "SET_USER_PROFILE", userInfo}) as const
 type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 
-export const updateNewPostTextActionCreator = (text: string) => (
-    {type: ON_CHANGE_POST_FIELD, text} as const
-)
-type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextActionCreator>
 
 type ProfileReducerActionsType =
     AddPostActionType
     | SetUserProfileActionType
-    | UpdateNewPostTextActionType
     | SetStatusActionType
 
 const profileReducer = (state: ProfilePageType = initialState, action: ProfileReducerActionsType): ProfilePageType => {
     switch (action.type) {
-        case ADD_POST:
+        case "ADD-POST":
             const newPost = {
                 id: (state.posts.length + 1),
-                message: state.tempPostValue,
+                message: action.postText,
                 likesCount: 0
             }
             return {
                 ...state,
-                posts: [...state.posts, newPost],
-                tempPostValue: ''
+                posts: [...state.posts, newPost]
             }
-        case ON_CHANGE_POST_FIELD:
-            return {
-                ...state,
-                tempPostValue: action.text
-            }
-        case SET_USER_PROFILE:
+        case "SET_USER_PROFILE":
             return {
                 ...state,
                 profile: action.userInfo

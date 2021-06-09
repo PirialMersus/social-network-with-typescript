@@ -1,5 +1,5 @@
-import dialogsReducer from "./dialogs-reducer";
-import profileReducer from "./profile-reducer";
+import dialogsReducer, {DialogsPageType} from "./dialogs-reducer";
+import profileReducer, { ProfilePageType } from "./profile-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import {UserResponseType} from "./users-reducer";
 import {ProfileResponseType} from "../components/Profile/ProfileContainer";
@@ -35,18 +35,8 @@ export type DialogType = {
     id: number
     icon: string
 }
-export type ProfilePageType = {
-    posts: Array<PostType>
-    tempPostValue: string
-    profile: ProfileResponseType | null
-    status: string
-}
-export type DialogsPageType = {
-    messages: Array<MessagesType>
-    dialogs: Array<DialogType>
-    tempMessage: string
 
-}
+
 export type ActionType = {
     type: string
     text?: string
@@ -81,7 +71,6 @@ const store: RootStoreType = {
                 {id: 5, message: "sdfsdfs", likesCount: 100},
                 {id: 6, message: "Привет из Одессы", likesCount: 53},
             ],
-            tempPostValue: '',
             profile: null,
             status: ''
         },
@@ -95,7 +84,6 @@ const store: RootStoreType = {
                 {id: 2, message: "I am here"},
                 {id: 3, message: "Man!!!"}
             ],
-            tempMessage: '',
             dialogs: [
                 {name: 'God', id: 1, icon: "https://ichef.bbci.co.uk/images/ic/640xn/p06w97zx.jpg"},
                 {

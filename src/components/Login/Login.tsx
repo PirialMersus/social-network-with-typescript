@@ -2,10 +2,6 @@ import React from "react";
 import {Field, reduxForm} from 'redux-form'
 import { InjectedFormProps } from 'redux-form';
 
-type LoginFormPropsType = {
-    handleSubmit: () => void
-}
-
 const LoginForm = (props: InjectedFormProps) => {
     return (
         <form onSubmit={props.handleSubmit}>
