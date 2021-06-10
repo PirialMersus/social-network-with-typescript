@@ -1,6 +1,7 @@
 import React from "react";
 import {Field, reduxForm} from 'redux-form'
 import {InjectedFormProps} from 'redux-form';
+import {validate} from "../../../utils/validators/validators";
 
 const AddMessageForm = (props: InjectedFormProps) => {
     return (
@@ -20,6 +21,6 @@ const AddMessageForm = (props: InjectedFormProps) => {
         </form>
     )
 }
-const AddMessageReduxForm = reduxForm({form: 'addMessageForm'})(AddMessageForm)
+const AddMessageReduxForm = reduxForm({form: 'addMessageForm', validate})(AddMessageForm)
 
 export default AddMessageReduxForm

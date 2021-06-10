@@ -9,7 +9,7 @@ import {
     setStatusThunkCreator,
     setUserProfile
 } from "../../redux/profile-reducer";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 

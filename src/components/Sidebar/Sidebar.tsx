@@ -1,6 +1,7 @@
 import React from "react";
 import {FriendType} from "../../redux/store";
 import s from "./Sidebar.module.css"
+import {NavLink} from "react-router-dom";
 
 export type SidebarPropsType = {
     sidebar: Array<FriendType>
@@ -13,13 +14,12 @@ const Sidebar = (props: SidebarPropsType) => {
             <div className={s.friends}>
                 {props.sidebar.map((friend: FriendType) => {
                     return (
-                        <a href="#" key={friend.id}>
+                        <NavLink to={'/profile/' + friend.id} key={friend.id}>
                             <div className={s.friend}>
                                 <img src={friend.img} alt={friend.name}/>
                                 <p>{friend.name}</p>
                             </div>
-                        </a>
-
+                        </NavLink>
                     )
                 })}
 
