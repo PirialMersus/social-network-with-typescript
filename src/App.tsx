@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Route} from 'react-router-dom';
 import News from "./components/News/News";
 import Music from './components/Music/Music';
 import Settings from "./components/Settings/Settings";
@@ -19,7 +19,7 @@ type AppPropsType = {
 
 const App = (props: AppPropsType) => {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <div className="app-wrapper">
                 <HeaderContainer/>
                 <Navbar sidebar={props.state.sidebar}/>
@@ -49,7 +49,7 @@ const App = (props: AppPropsType) => {
                 </div>
 
             </div>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 

@@ -11,7 +11,6 @@ const AddMessageForm = (props: InjectedFormProps) => {
                        placeholder='message text'
                        name={'messageText'}
                        component={"textarea"}
-                    // value={props.value}
                 />
             </div>
 
