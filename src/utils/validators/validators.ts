@@ -14,7 +14,7 @@ export const required = (value?: string) => {
     return  "Field is required"
 }
 
-export const maxLength30 = (value: string) => {
+export const maxLength10 = (value: string) => {
     if (value.length > 10) return 'Max length is 10 symbols'
     return undefined
 }
