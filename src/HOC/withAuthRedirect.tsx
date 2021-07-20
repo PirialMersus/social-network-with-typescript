@@ -4,7 +4,7 @@ import {connect} from "react-redux"
 import {AppStateType} from "../redux/redux-store";
 
 type MapStateToPropsType = {
-    isAuth: boolean
+    isAuth: boolean | null
 }
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {

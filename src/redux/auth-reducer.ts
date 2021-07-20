@@ -1,16 +1,19 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/API";
 import {AxiosResponse} from "axios";
+import {ThunkAction} from "redux-thunk";
+import {AppActionsType, AppStateType, AppThunk} from "./redux-store";
 
 const SET_USER_DATA = "SET_USER_DATA"
 
 
 export type SetUserDataActionType = {
     type: "SET_USER_DATA"
-    data: {
+    payload: {
         id: number | null
         login: string | null
         email: string | null
+        isAuth: boolean | null
     }
 }
 export type IsFetchingActionType = {
@@ -35,10 +38,10 @@ export type AuthStateType = {
     id: number | null
     login: string | null
     email: string | null
-    isAuth: boolean
+    isAuth: boolean | null
 }
 
-type ActionsType = SetUserDataActionType
+export type AuthActionsType = SetUserDataActionType
 
 
 const initialState: AuthStateType = {
@@ -49,13 +52,12 @@ const initialState: AuthStateType = {
 }
 
 
-const authReducer = (state = initialState, action: ActionsType): AuthStateType => {
+const authReducer = (state = initialState, action: AuthActionsType): AuthStateType => {
     switch (action.type) {
         case "SET_USER_DATA":
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload
             }
 
         default:
@@ -63,12 +65,13 @@ const authReducer = (state = initialState, action: ActionsType): AuthStateType =
     }
 }
 
-export const setUserDataAC = (userId: number, login: string, email: string) => ({
+export const setUserDataAC = (userId: number | null, login: string | null, email: string | null, isAuth: boolean) => ({
     type: SET_USER_DATA,
-    data: {
+    payload: {
         userId,
         login,
-        email
+        email,
+        isAuth
     }
 })
 
@@ -77,7 +80,38 @@ export const getMeThunkCreator = () => {
         authAPI.getMe()
             .then((response: AxiosResponse) => {
                 if (response.data.resultCode === 0) {
-                    dispatch(setUserDataAC(response.data.data.id, response.data.data.login, response.data.data.email))
+                    dispatch(setUserDataAC(response.data.data.id, response.data.data.login, response.data.data.email, true))
+                }
+            })
+    }
+}
+export const login = (email: string, password: string, rememberMe: boolean): AppThunk => async dispatch => {
+    try {
+        const response = await authAPI.login(email, password, rememberMe)
+        if (response.data.resultCode === 0) {
+            dispatch(getMeThunkCreator())
+        }
+    } catch (e) {
+        throw new Error(e)
+    }
+}
+export const logout = (): AppThunk => async dispatch => {
+    try {
+        const response = await authAPI.logout()
+        if (response.data.resultCode === 0) {
+            dispatch(setUserDataAC(null, null, null, false))
+        }
+    } catch (e) {
+        throw new Error(e)
+    }
+}
+
+export const login1 = (email: string, password: string, rememberMe: boolean): AppThunk => {
+    return (dispatch) => {
+        authAPI.login(email, password, rememberMe)
+            .then((response: AxiosResponse) => {
+                if (response.data.resultCode === 0) {
+                    dispatch(getMeThunkCreator())
                 }
             })
     }

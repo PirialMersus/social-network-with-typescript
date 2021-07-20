@@ -1,4 +1,16 @@
-import {ActionType, FriendType} from "./store";
+
+export type FriendType = {
+    id: number
+    img: string
+    name: string
+}
+
+export type SideBarActionsType = {
+    type: string
+    text?: string
+}
+
+
 
 const initialState = [
     {
@@ -18,7 +30,7 @@ const initialState = [
     }
 ]
 
-const sidebarReducer = (state: Array<FriendType> = initialState, action: ActionType) => {
+const sidebarReducer = (state: Array<FriendType> = initialState, action: SideBarActionsType) => {
     return state
 }
 export default sidebarReducer

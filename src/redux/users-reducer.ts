@@ -59,7 +59,7 @@ export type DataResponseType = {
     totalCount: number
 }
 
-type ActionsType =
+export type UsersActionsType =
     FollowActionType
     | UnfollowActionType
     | SetUsersActionType
@@ -88,7 +88,7 @@ export type UsersPageType = {
 }
 
 
-const usersReducer = (state = initialState, action: ActionsType): UsersPageType => {
+const usersReducer = (state = initialState, action: UsersActionsType): UsersPageType => {
     switch (action.type) {
         case FOLLOW:
             return {

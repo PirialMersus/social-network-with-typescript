@@ -2,12 +2,14 @@ import React from "react";
 import Header from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {getMeThunkCreator, setUserDataAC} from "../../redux/auth-reducer";
+import {getMeThunkCreator, logout, setUserDataAC} from "../../redux/auth-reducer";
 
 type HeaderContainerPropsType = {
     login: string | null
-    setUserDataAC: (userId: number, login: string, email: string) => void
+    isAuth: boolean | null
+    // setUserDataAC: (userId: number, login: string, email: string, ) => void
     getMeThunkCreator: () => void
+    logout: () => void
 }
 
 // type AuthResponseType = {
@@ -35,10 +37,11 @@ class HeaderContainer extends React.Component<HeaderContainerPropsType> {
 
 const mapStateToProps = (state: AppStateType) => {
     return {
-        login: state.auth.login
+        login: state.auth.login,
+        isAuth: state.auth.isAuth
     }
 }
 
 export default connect(mapStateToProps, {
-    setUserDataAC, getMeThunkCreator
+    setUserDataAC, getMeThunkCreator, logout
 })(HeaderContainer)

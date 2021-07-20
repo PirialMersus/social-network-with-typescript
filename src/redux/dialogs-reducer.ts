@@ -5,7 +5,7 @@ export type DialogsPageType = {
     dialogs: Array<DialogType>
 }
 
-type DialogsReducerActionType = AddMessageActionCreatorType
+export type DialogsReducerActionType = AddMessageActionCreatorType
 
 
 const initialState  = {

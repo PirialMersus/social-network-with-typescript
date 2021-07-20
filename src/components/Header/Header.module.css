@@ -14,7 +14,7 @@
     margin-right: 10px;
 }
 
-.loginBlock a {
+.loginBlock div a {
     background-color: deepskyblue;
     padding: 6px 12px;
     border-radius: 10px;
@@ -22,10 +22,21 @@
     transition: all 0.3s ease;
 }
 
-.loginBlock a:hover {
+.loginBlock div a:hover {
     background-color: #4298ee;
 }
-.loginBlock p{
+.loginBlock div p{
     padding: 6px 12px;
 
+}
+.loginBlock div button{
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.loginBlock div {
+    display: flex;
+    align-items: center;
 }

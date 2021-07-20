@@ -4,6 +4,8 @@ import s from "./Header.module.css"
 
 type HeaderPropsType = {
     login: string | null
+    isAuth: boolean | null
+    logout: () => void
 }
 
 const Header = (props: HeaderPropsType) => {
@@ -12,8 +14,13 @@ const Header = (props: HeaderPropsType) => {
             <img
                 src="https://raw.githubusercontent.com/PirialMersus/frontend-js/master/yds/img/logo.png"
                 alt="logo"/>
-            <div className={s.loginBlock}>{props.login ? <p>{props.login}</p> :
-                <NavLink to={"/login"}>Login</NavLink>}
+            <div className={s.loginBlock}>
+                {props.isAuth
+                    ? <div>
+                        <p>{props.login}</p>
+                        <button onClick={props.logout}>Log out</button>
+                    </div>
+                    : <NavLink to={"/login"}>Login</NavLink>}
             </div>
 
         </header>

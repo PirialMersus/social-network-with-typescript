@@ -30,7 +30,7 @@ export const setUserProfile = (userInfo: ProfileResponseType) => ({type: "SET_US
 type SetUserProfileActionType = ReturnType<typeof setUserProfile>
 
 
-type ProfileReducerActionsType =
+export type ProfileReducerActionsType =
     AddPostActionType
     | SetUserProfileActionType
     | SetStatusActionType
