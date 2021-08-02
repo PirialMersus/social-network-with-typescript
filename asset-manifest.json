@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.5e6423ad.chunk.css",
-    "main.js": "/static/js/main.d8816f53.chunk.js",
-    "main.js.map": "/static/js/main.d8816f53.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.5c48845e.js",
-    "runtime-main.js.map": "/static/js/runtime-main.5c48845e.js.map",
-    "static/js/2.eb41f05f.chunk.js": "/static/js/2.eb41f05f.chunk.js",
-    "static/js/2.eb41f05f.chunk.js.map": "/static/js/2.eb41f05f.chunk.js.map",
-    "static/js/3.a76acc07.chunk.js": "/static/js/3.a76acc07.chunk.js",
-    "static/js/3.a76acc07.chunk.js.map": "/static/js/3.a76acc07.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.5e6423ad.chunk.css.map": "/static/css/main.5e6423ad.chunk.css.map",
-    "static/js/2.eb41f05f.chunk.js.LICENSE.txt": "/static/js/2.eb41f05f.chunk.js.LICENSE.txt",
-    "static/media/bg_mountains.4f6edd9d.jpg": "/static/media/bg_mountains.4f6edd9d.jpg",
-    "static/media/tail-spin.86194a55.svg": "/static/media/tail-spin.86194a55.svg"
+    "main.css": "/social-network-with-typescript/static/css/main.7d0829cb.chunk.css",
+    "main.js": "/social-network-with-typescript/static/js/main.9c557413.chunk.js",
+    "main.js.map": "/social-network-with-typescript/static/js/main.9c557413.chunk.js.map",
+    "runtime-main.js": "/social-network-with-typescript/static/js/runtime-main.88f2951e.js",
+    "runtime-main.js.map": "/social-network-with-typescript/static/js/runtime-main.88f2951e.js.map",
+    "static/js/2.e7aae48c.chunk.js": "/social-network-with-typescript/static/js/2.e7aae48c.chunk.js",
+    "static/js/2.e7aae48c.chunk.js.map": "/social-network-with-typescript/static/js/2.e7aae48c.chunk.js.map",
+    "static/js/3.9553477f.chunk.js": "/social-network-with-typescript/static/js/3.9553477f.chunk.js",
+    "static/js/3.9553477f.chunk.js.map": "/social-network-with-typescript/static/js/3.9553477f.chunk.js.map",
+    "index.html": "/social-network-with-typescript/index.html",
+    "static/css/main.7d0829cb.chunk.css.map": "/social-network-with-typescript/static/css/main.7d0829cb.chunk.css.map",
+    "static/js/2.e7aae48c.chunk.js.LICENSE.txt": "/social-network-with-typescript/static/js/2.e7aae48c.chunk.js.LICENSE.txt",
+    "static/media/bg_mountains.4f6edd9d.jpg": "/social-network-with-typescript/static/media/bg_mountains.4f6edd9d.jpg",
+    "static/media/tail-spin.86194a55.svg": "/social-network-with-typescript/static/media/tail-spin.86194a55.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.5c48845e.js",
-    "static/js/2.eb41f05f.chunk.js",
-    "static/css/main.5e6423ad.chunk.css",
-    "static/js/main.d8816f53.chunk.js"
+    "static/js/runtime-main.88f2951e.js",
+    "static/js/2.e7aae48c.chunk.js",
+    "static/css/main.7d0829cb.chunk.css",
+    "static/js/main.9c557413.chunk.js"
   ]
 }
